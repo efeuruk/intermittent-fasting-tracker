@@ -28,7 +28,7 @@ export const CardSubTitle = styled((props: TypographyProps) => (
   font-weight: 400;
 `;
 
-export const InputsContainer = styled.div`
+export const InputsForm = styled.form`
   display: flex;
   flex-direction: column;
   margin-top: 48px;
