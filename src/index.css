@@ -17,3 +17,14 @@ body {
   margin: 0;
   padding: 0;
 }
+
+input[type="time"] {
+  border: none;
+  color: #6567d9;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
