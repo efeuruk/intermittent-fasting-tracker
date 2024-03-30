@@ -3,7 +3,7 @@ import api from "../api";
 
 type AuthContextType = {
   isLoggedIn: boolean;
-  setIsLoggedIn: (isLoggedIn: boolean) => void;
+  setLoggedIn: (isLoggedIn: boolean) => void;
   register: ({
     name,
     email,
@@ -13,6 +13,8 @@ type AuthContextType = {
     email: string;
     password: string;
   }) => Promise<boolean>;
+  usersName: string;
+  setUsersName: (name: string) => void;
 };
 
 export const AuthContext = createContext({} as AuthContextType);
@@ -20,7 +22,8 @@ export const AuthContext = createContext({} as AuthContextType);
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [usersName, setUsersName] = useState("");
 
   const register = async ({
     name,
@@ -41,7 +44,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, register }}>
+    <AuthContext.Provider
+      value={{ isLoggedIn, setLoggedIn, register, usersName, setUsersName }}
+    >
       {children}
     </AuthContext.Provider>
   );

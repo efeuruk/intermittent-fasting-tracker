@@ -17,7 +17,7 @@ const SignUp = () => {
 
   const authContext = useAuthContext();
 
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -25,6 +25,8 @@ const SignUp = () => {
     setLoading(true);
     const status = await authContext.register(data);
     if (status) {
+      authContext.setUsersName(data.name);
+      authContext.setLoggedIn(true);
       navigate("/home");
     } else {
       console.error("Can't register");
@@ -74,9 +76,9 @@ const SignUp = () => {
             <CTAButton
               style={{ marginTop: "39px" }}
               type="submit"
-              disabled={loading}
+              disabled={isLoading}
             >
-              {loading && (
+              {isLoading && (
                 <CircularProgress
                   sx={{
                     color: "rgba(0, 0, 0, 0.26)",
