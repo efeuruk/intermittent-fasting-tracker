@@ -1,3 +1,5 @@
+import { TWENTY_FOUR_HOURS_IN_SECONDS } from "./constants";
+
 export const calculateTimePickerDifference = (
   startTime: string,
   endTime: string
@@ -19,9 +21,13 @@ export const calculateTimePickerDifference = (
 };
 
 export const formatCountdownTime = (seconds: number) => {
+  if (seconds < 0) {
+    return "00:00:00";
+  }
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
   const remainingSeconds = Math.floor(seconds % 60);
+
   return `${hours.toString().padStart(2, "0")}:${minutes
     .toString()
     .padStart(2, "0")}:${remainingSeconds.toString().padStart(2, "0")}`;
@@ -37,4 +43,8 @@ export const calculateProgressPercentage = (
   } else {
     return 0;
   }
+};
+
+export const calculate24HourDiff = (givenSeconds: number) => {
+  return TWENTY_FOUR_HOURS_IN_SECONDS - givenSeconds;
 };

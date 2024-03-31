@@ -6,12 +6,7 @@ import Countdown from "../Countdown/Countdown";
 import { calculateTimePickerDifference } from "../../utils";
 import Lottie from "react-lottie";
 import CompletedLottie from "../../lotties/fasting-completed-animation.json";
-
-enum Status {
-  READY = "ready",
-  ONGOING = "ongoing",
-  COMPLETED = "completed",
-}
+import { Status } from "../../types";
 
 const getFastingTexts = (status: Status) => {
   if (status === Status.READY) {
@@ -50,26 +45,21 @@ const FastingCard = () => {
   const [startTime, setStartTime] = React.useState("00:00");
   const [endTime, setEndTime] = React.useState("00:01");
 
-  const [showFinishAnimation, setShowFinishAnimation] = React.useState(false);
-
   const toggleTimer = () => {
     if (timerStatus === Status.COMPLETED) {
       setTimerStarted(false);
       setTimerStatus(Status.READY);
       countdownRef?.current?.stopCountdown();
-      setShowFinishAnimation(false);
       return;
     }
     if (timerStarted) {
       setTimerStarted(false);
       setTimerStatus(Status.COMPLETED);
       countdownRef?.current?.pauseCountdown();
-      setShowFinishAnimation(true);
     } else {
       setTimerStarted(true);
       setTimerStatus(Status.ONGOING);
       countdownRef?.current?.startCountdown();
-      setShowFinishAnimation(false);
     }
   };
 
@@ -81,7 +71,7 @@ const FastingCard = () => {
 
   return (
     <S.StyledCard variant="outlined">
-      {showFinishAnimation && (
+      {timerStatus === Status.COMPLETED && (
         <div
           style={{
             position: "absolute",
@@ -100,6 +90,8 @@ const FastingCard = () => {
           ref={countdownRef}
           durationInSeconds={calculateTimePickerDifference(startTime, endTime)}
           label={getFastingTexts(timerStatus)?.time}
+          status={timerStatus}
+          setTimerStatus={setTimerStatus}
         />
         <S.Timers>
           <div>

@@ -1,13 +1,24 @@
 import React, { useState, useEffect, useImperativeHandle } from "react";
-import { calculateProgressPercentage, formatCountdownTime } from "../../utils";
+import {
+  calculate24HourDiff,
+  calculateProgressPercentage,
+  formatCountdownTime,
+} from "../../utils";
+import { TWENTY_FOUR_HOURS_IN_SECONDS } from "../../constants";
+import { Status, StatusColor } from "../../types";
 
 type CountdownProps = {
   durationInSeconds: number;
   label: string;
+  status: Status;
+  setTimerStatus: React.Dispatch<React.SetStateAction<Status>>;
 };
 
 const Countdown = React.forwardRef(
-  ({ durationInSeconds, label }: CountdownProps, ref) => {
+  (
+    { durationInSeconds, label, status, setTimerStatus }: CountdownProps,
+    ref
+  ) => {
     const [startTime, setStartTime] = useState<number>(0);
     const [isRunning, setIsRunning] = useState(false);
     const [elapsedTime, setElapsedTime] = useState(durationInSeconds - 60);
@@ -24,12 +35,13 @@ const Countdown = React.forwardRef(
           if (newElapsedTime >= durationInSeconds) {
             setIsRunning(false);
             clearInterval(intervalId);
+            setTimerStatus(Status.COMPLETED);
           }
         }, 1000);
       }
 
       return () => clearInterval(intervalId);
-    }, [isRunning, startTime, durationInSeconds]);
+    }, [isRunning, startTime, durationInSeconds, setTimerStatus]);
 
     useImperativeHandle(ref, () => ({
       startCountdown,
@@ -54,12 +66,40 @@ const Countdown = React.forwardRef(
       setElapsedTime(0);
     };
 
-    const radius = 140;
-    const circumference = 2 * Math.PI * radius; // cevre
+    const radius = 130;
+    const circumference = 2 * Math.PI * radius;
     const progress = (elapsedTime / durationInSeconds) * circumference;
-    const circleStyle = {
+
+    const readyCircleStyle = {
+      strokeDasharray: `${circumference}px`,
+      strokeDashoffset:
+        (circumference * calculate24HourDiff(durationInSeconds)) /
+        TWENTY_FOUR_HOURS_IN_SECONDS,
+    };
+
+    const onGoingAndCompletedCircleStyle = {
       strokeDasharray: `${circumference} ${circumference}`,
-      strokeDashoffset: circumference - progress,
+      strokeDashoffset: progress - circumference,
+    };
+
+    const generateCircle = (
+      stroke: string,
+      style: {
+        strokeDasharray: string;
+        strokeDashoffset: number;
+      }
+    ) => {
+      return (
+        <circle
+          stroke={stroke}
+          strokeWidth="24"
+          fill="transparent"
+          r={radius}
+          cx="160"
+          cy="160"
+          style={style}
+        />
+      );
     };
 
     return (
@@ -73,17 +113,15 @@ const Countdown = React.forwardRef(
             cx="160"
             cy="160"
           />
-          <circle
-            stroke="#B4B5F9"
-            strokeWidth="24"
-            fill="transparent"
-            r={radius}
-            cx="160"
-            cy="160"
-            style={{
-              ...circleStyle,
-            }}
-          />
+          {status === Status.READY &&
+            generateCircle(StatusColor.READY, readyCircleStyle)}
+          {status === Status.ONGOING &&
+            generateCircle(StatusColor.ONGOING, onGoingAndCompletedCircleStyle)}
+          {(status === Status.COMPLETED || !isRunning) &&
+            generateCircle(
+              StatusColor.COMPLETED,
+              onGoingAndCompletedCircleStyle
+            )}
           <text
             x="50%"
             y="45%"
