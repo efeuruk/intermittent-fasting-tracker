@@ -12,11 +12,18 @@ type CountdownProps = {
   label: string;
   status: Status;
   setTimerStatus: React.Dispatch<React.SetStateAction<Status>>;
+  onCountdownComplete: (elapsedTime: number) => void;
 };
 
 const Countdown = React.forwardRef(
   (
-    { durationInSeconds, label, status, setTimerStatus }: CountdownProps,
+    {
+      durationInSeconds,
+      label,
+      status,
+      setTimerStatus,
+      onCountdownComplete,
+    }: CountdownProps,
     ref
   ) => {
     const [startTime, setStartTime] = useState<number>(0);
@@ -65,6 +72,13 @@ const Countdown = React.forwardRef(
       setIsRunning(false);
       setElapsedTime(0);
     };
+
+    useEffect(() => {
+      if (status === Status.COMPLETED) {
+        onCountdownComplete(elapsedTime);
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [status]);
 
     const radius = 130;
     const circumference = 2 * Math.PI * radius;

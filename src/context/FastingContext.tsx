@@ -9,7 +9,10 @@ type FastingItem = {
 };
 
 type FastingContextType = {
+  // state
   fastingList: FastingItem[];
+
+  // actions
   addToFastingList: ({
     duration,
     startTime,
@@ -20,6 +23,8 @@ type FastingContextType = {
     endTime: string;
   }) => void;
   removeFromFastingList: (date: Date) => void;
+
+  // getters
   getTotalFastingHours: () => number;
   getTotalCompletedFasting: () => number;
 };
@@ -43,7 +48,11 @@ export const FastingProvider: React.FC<{ children: React.ReactNode }> = ({
     endTime: string;
   }) => {
     const date = new Date();
-    setFastingList(prev => [...prev, { duration, date, startTime, endTime }]);
+    const durationInHours = getHoursFromSeconds(duration);
+    setFastingList(prev => [
+      ...prev,
+      { duration: durationInHours, date, startTime, endTime },
+    ]);
   };
 
   const removeFromFastingList = (date: Date) => {

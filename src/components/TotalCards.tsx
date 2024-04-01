@@ -1,3 +1,4 @@
+import { useFastingContext } from "../context/hooks/useFastingContext";
 import TotalCard from "./TotalCard";
 import styled from "styled-components";
 
@@ -8,15 +9,21 @@ const Container = styled.div`
 `;
 
 const TotalCards = () => {
+  const { getTotalFastingHours, getTotalCompletedFasting } =
+    useFastingContext();
   return (
     <Container>
       <TotalCard
         icon={"⌛️"}
-        number={48}
+        number={getTotalFastingHours()}
         title={"Total Hours"}
         style={{ marginRight: "30px" }}
       />
-      <TotalCard icon={"🎉"} number={6} title={"Total Completed Fasting"} />
+      <TotalCard
+        icon={"🎉"}
+        number={getTotalCompletedFasting()}
+        title={"Total Completed Fasting"}
+      />
     </Container>
   );
 };

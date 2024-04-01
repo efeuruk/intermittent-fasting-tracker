@@ -7,6 +7,7 @@ import { calculateTimePickerDifference } from "../../utils";
 import Lottie from "react-lottie";
 import CompletedLottie from "../../lotties/fasting-completed-animation.json";
 import { Status } from "../../types";
+import { useFastingContext } from "../../context/hooks/useFastingContext";
 
 const getFastingTexts = (status: Status) => {
   if (status === Status.READY) {
@@ -63,6 +64,16 @@ const FastingCard = () => {
     }
   };
 
+  const { addToFastingList } = useFastingContext();
+
+  const handleCountdownComplete = (ellapsedTime: number) => {
+    addToFastingList({
+      duration: ellapsedTime,
+      startTime,
+      endTime,
+    });
+  };
+
   const lottieOptions = {
     loop: true,
     autoplay: true,
@@ -92,6 +103,7 @@ const FastingCard = () => {
           label={getFastingTexts(timerStatus)?.time}
           status={timerStatus}
           setTimerStatus={setTimerStatus}
+          onCountdownComplete={handleCountdownComplete}
         />
         <S.Timers>
           <div>
