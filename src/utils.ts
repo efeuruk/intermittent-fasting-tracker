@@ -48,3 +48,35 @@ export const calculateProgressPercentage = (
 export const calculate24HourDiff = (givenSeconds: number) => {
   return TWENTY_FOUR_HOURS_IN_SECONDS - givenSeconds;
 };
+
+const calculateHoursAndMinutes = (seconds: number) => {
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+
+  return { hours, minutes };
+};
+
+export const getHoursFromSeconds = (seconds: number) => {
+  const { hours } = calculateHoursAndMinutes(seconds);
+  return hours;
+};
+
+export const getHoursAndMinutesFromSeconds = (seconds: number) => {
+  const { hours, minutes } = calculateHoursAndMinutes(seconds);
+  let hoursText = "hours";
+  let minutesText = "minutes";
+
+  if (hours > 1) {
+    hoursText = "hours";
+  } else {
+    hoursText = "hour";
+  }
+
+  if (minutes > 1) {
+    minutesText = "minutes";
+  } else {
+    minutesText = "minute";
+  }
+
+  return `${hours} ${hoursText} ${minutes} ${minutesText}`;
+};
