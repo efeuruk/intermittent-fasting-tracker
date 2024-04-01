@@ -26,8 +26,7 @@ const ViewButton = styled((props: ButtonProps) => <Button {...props} />)`
   text-transform: none;
   color: #834cc9;
   &:hover {
-    background-color: #834cc9;
-    color: #fff;
+    background-color: rgba(131, 76, 201, 0.2);
   }
 `;
 
@@ -38,22 +37,22 @@ const FastingListContainer = styled.div`
 const FastingList = () => {
   const { fastingList } = useFastingContext();
   return (
-    <Container>
-      <TitleContainer>
-        <Title component={"h4"}>My Latest Fastings</Title>
-        <ViewButton>View All</ViewButton>
-      </TitleContainer>
-      {fastingList.length > 0 && (
+    fastingList.length > 0 && (
+      <Container>
+        <TitleContainer>
+          <Title component={"h4"}>My Latest Fastings</Title>
+          <ViewButton>View All</ViewButton>
+        </TitleContainer>
         <FastingListContainer>
           {fastingList.map(fasting => (
-            <div key={fasting.date.toString()}>
-              <p>{fasting.duration} hours</p>
-            </div>
+            <FastingListItem
+              key={fasting.date.toISOString()}
+              fasting={fasting}
+            />
           ))}
         </FastingListContainer>
-      )}
-      <FastingListItem fasting={fastingList[0]} />
-    </Container>
+      </Container>
+    )
   );
 };
 

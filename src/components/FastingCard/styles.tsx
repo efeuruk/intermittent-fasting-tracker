@@ -3,9 +3,9 @@ import styled from "styled-components";
 
 export const StyledCard = styled(Card)`
   position: relative;
-  border-radius: 16px;
   padding: 72px 92px 3px 92px;
   margin-top: 36px;
+  border-radius: 16px;
 `;
 
 export const FastingCardTitle = styled(Typography)`

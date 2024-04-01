@@ -8,10 +8,11 @@ import {
 import styled from "styled-components";
 
 export const StyledCard = styled(Card)`
-  border-radius: 16px;
   padding: 32px 30px 30px;
+  margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
+  border-radius: 16px;
 `;
 
 export const LeftContainer = styled.div`

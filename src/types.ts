@@ -12,6 +12,7 @@ export enum StatusColor {
 
 export type FastingItem = {
   duration: number;
+  durationInHours: number;
   date: Date;
   startTime: string;
   endTime: string;

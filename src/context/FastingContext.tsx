@@ -32,6 +32,12 @@ export const FastingProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [fastingList, setFastingList] = useState<FastingItem[]>([]);
 
+  const sortFastingListByDate = () => {
+    fastingList.sort(
+      (a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf()
+    );
+  };
+
   const addToFastingList = ({
     duration,
     startTime,
@@ -45,8 +51,9 @@ export const FastingProvider: React.FC<{ children: React.ReactNode }> = ({
     const durationInHours = getHoursFromSeconds(duration);
     setFastingList(prev => [
       ...prev,
-      { duration: durationInHours, date, startTime, endTime },
+      { durationInHours, duration, date, startTime, endTime },
     ]);
+    sortFastingListByDate();
   };
 
   const removeFromFastingList = (date: Date) => {

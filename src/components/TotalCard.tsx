@@ -3,8 +3,8 @@ import React from "react";
 
 const StyledCard = styled(Card)`
   padding: 24px 20px 31px 20px;
-  border-radius: 16px;
   flex: 1;
+  border-radius: 16px;
 `;
 
 const Icon = styled(Typography)`

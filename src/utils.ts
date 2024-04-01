@@ -20,12 +20,18 @@ export const calculateTimePickerDifference = (
   return difference * 60;
 };
 
+const calculateHoursAndMinutes = (seconds: number) => {
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+
+  return { hours, minutes };
+};
+
 export const formatCountdownTime = (seconds: number) => {
   if (seconds < 0) {
     return "00:00:00";
   }
-  const hours = Math.floor(seconds / 3600);
-  const minutes = Math.floor((seconds % 3600) / 60);
+  const { hours, minutes } = calculateHoursAndMinutes(seconds);
   const remainingSeconds = Math.floor(seconds % 60);
 
   return `${hours.toString().padStart(2, "0")}:${minutes
@@ -47,13 +53,6 @@ export const calculateProgressPercentage = (
 
 export const calculate24HourDiff = (givenSeconds: number) => {
   return TWENTY_FOUR_HOURS_IN_SECONDS - givenSeconds;
-};
-
-const calculateHoursAndMinutes = (seconds: number) => {
-  const hours = Math.floor(seconds / 3600);
-  const minutes = Math.floor((seconds % 3600) / 60);
-
-  return { hours, minutes };
 };
 
 export const getHoursFromSeconds = (seconds: number) => {
@@ -78,5 +77,47 @@ export const getHoursAndMinutesFromSeconds = (seconds: number) => {
     minutesText = "minute";
   }
 
-  return `${hours} ${hoursText} ${minutes} ${minutesText}`;
+  return `${hours} ${hoursText} ${
+    minutes > 0 ? `${minutes} ${minutesText}` : ""
+  }`;
+};
+
+export const getTimeAgo = (date: Date) => {
+  const now = new Date();
+  const diffInSeconds = Math.floor((now.valueOf() - date.valueOf()) / 1000);
+
+  if (diffInSeconds < 60) {
+    return "just now";
+  } else if (diffInSeconds < 3600) {
+    const minutes = Math.floor(diffInSeconds / 60);
+    return `${minutes} minutes ago`;
+  } else if (diffInSeconds < 86400) {
+    const hours = Math.floor(diffInSeconds / 3600);
+    return `${hours} hours ago`;
+  } else {
+    const days = Math.floor(diffInSeconds / 86400);
+    if (days === 1) {
+      return "yesterday";
+    } else {
+      return `${days} days ago`;
+    }
+  }
+};
+
+export const calculateEndTimeFromDurationAndStartTime = (
+  startTime: string,
+  duration: number
+) => {
+  const [hours, minutes] = startTime.split(":").map(Number);
+
+  const startTimeInSeconds = hours * 3600 + minutes * 60;
+
+  const totalSeconds = startTimeInSeconds + duration;
+  const endHours = Math.floor(totalSeconds / 3600) % 24;
+  const endMinutes = Math.floor((totalSeconds % 3600) / 60);
+
+  const formattedHours = ("0" + endHours).slice(-2);
+  const formattedMinutes = ("0" + endMinutes).slice(-2);
+
+  return `${formattedHours}:${formattedMinutes}`;
 };
