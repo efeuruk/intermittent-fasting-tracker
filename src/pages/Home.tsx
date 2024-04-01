@@ -1,4 +1,5 @@
 import FastingCard from "../components/FastingCard/FastingCard";
+import TotalCards from "../components/TotalCards";
 import { useAuthContext } from "../context/hooks/useAuthContext";
 import { Typography } from "@mui/material";
 
@@ -10,6 +11,7 @@ const Home = () => {
         Hello <span style={{ fontWeight: 700 }}>{usersName}</span>
       </Typography>
       <FastingCard />
+      <TotalCards />
     </>
   );
 };

@@ -71,18 +71,18 @@ const FastingCard = () => {
 
   return (
     <S.StyledCard variant="outlined">
-      {timerStatus === Status.COMPLETED && (
-        <div
-          style={{
-            position: "absolute",
-            top: "-24%",
-            left: 0,
-          }}
-        >
-          <Lottie options={lottieOptions} />
-        </div>
-      )}
       <CardContent sx={{ padding: 0 }}>
+        {timerStatus === Status.COMPLETED && (
+          <div
+            style={{
+              position: "absolute",
+              top: "-24%",
+              left: 0,
+            }}
+          >
+            <Lottie options={lottieOptions} />
+          </div>
+        )}
         <S.FastingCardTitle>
           {getFastingTexts(timerStatus).title}
         </S.FastingCardTitle>
