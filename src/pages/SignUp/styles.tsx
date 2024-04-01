@@ -12,6 +12,7 @@ export const SignUpContainer = styled.div``;
 export const StyledCard = styled(Card)`
   padding: 50px 92px 38px 92px;
   border-radius: 16px;
+  border-color: transparent;
 `;
 
 export const CardTitle = styled((props: TypographyProps) => (

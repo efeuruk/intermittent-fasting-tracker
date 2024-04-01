@@ -6,6 +6,7 @@ export const StyledCard = styled(Card)`
   padding: 72px 92px 3px 92px;
   margin-top: 36px;
   border-radius: 16px;
+  border-color: transparent;
 `;
 
 export const FastingCardTitle = styled(Typography)`

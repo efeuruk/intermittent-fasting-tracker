@@ -4,7 +4,7 @@ import {
   ButtonProps as MUIButtonProps,
 } from "@mui/material";
 
-type CTAButtonProps = {} & MUIButtonProps;
+type CTAButtonProps = MUIButtonProps;
 
 const CTAButton: React.FC<CTAButtonProps> = props => {
   return (

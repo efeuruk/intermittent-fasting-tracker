@@ -1,13 +1,13 @@
 import React from "react";
 import * as S from "./styles";
 import { FastingItem } from "../../types";
-import { IconButton } from "@mui/material";
-import ThreeDotsIcon from "../../assets/three-dots.svg?react";
+
 import {
   calculateEndTimeFromDurationAndStartTime,
   getHoursAndMinutesFromSeconds,
   getTimeAgo,
 } from "../../utils";
+import DeleteButton from "../DeleteButton";
 
 type FastingListItemProps = {
   fasting: FastingItem;
@@ -29,9 +29,7 @@ const FastingListItem: React.FC<FastingListItemProps> = ({ fasting }) => {
           duration
         )}`}</S.StartAndEndTime>
       </S.LeftContainer>
-      <IconButton sx={{ width: "40px", height: "40px", alignSelf: "center" }}>
-        <ThreeDotsIcon />
-      </IconButton>
+      <DeleteButton fasting={fasting} />
     </S.StyledCard>
   );
 };

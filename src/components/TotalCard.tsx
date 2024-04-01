@@ -5,6 +5,7 @@ const StyledCard = styled(Card)`
   padding: 24px 20px 31px 20px;
   flex: 1;
   border-radius: 16px;
+  border-color: transparent;
 `;
 
 const Icon = styled(Typography)`
