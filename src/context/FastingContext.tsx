@@ -1,12 +1,6 @@
 import React, { createContext, useState } from "react";
 import { getHoursFromSeconds } from "../utils";
-
-type FastingItem = {
-  duration: number;
-  date: Date;
-  startTime: string;
-  endTime: string;
-};
+import { FastingItem } from "../types";
 
 type FastingContextType = {
   // state

@@ -2,7 +2,7 @@ import React from "react";
 import * as S from "./styles";
 import { CardContent } from "@mui/material";
 import CTAButton from "../CTAButton";
-import Countdown from "../Countdown/Countdown";
+import Countdown from "../Countdown";
 import { calculateTimePickerDifference } from "../../utils";
 import Lottie from "react-lottie";
 import CompletedLottie from "../../lotties/fasting-completed-animation.json";

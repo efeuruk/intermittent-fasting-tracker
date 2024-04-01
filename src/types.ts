@@ -9,3 +9,10 @@ export enum StatusColor {
   ONGOING = "#FFCB8D",
   COMPLETED = "#89C36D",
 }
+
+export type FastingItem = {
+  duration: number;
+  date: Date;
+  startTime: string;
+  endTime: string;
+};

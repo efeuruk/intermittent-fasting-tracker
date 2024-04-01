@@ -3,9 +3,9 @@ import {
   calculate24HourDiff,
   calculateProgressPercentage,
   formatCountdownTime,
-} from "../../utils";
-import { TWENTY_FOUR_HOURS_IN_SECONDS } from "../../constants";
-import { Status, StatusColor } from "../../types";
+} from "../utils";
+import { TWENTY_FOUR_HOURS_IN_SECONDS } from "../constants";
+import { Status, StatusColor } from "../types";
 
 type CountdownProps = {
   durationInSeconds: number;
