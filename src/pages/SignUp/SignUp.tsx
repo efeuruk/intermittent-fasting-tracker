@@ -4,7 +4,7 @@ import CTAButton from "../../components/CTAButton";
 import { useAuthContext } from "../../context/hooks/useAuthContext";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { Navigate, useNavigate } from "react-router";
 
 type Inputs = {
   name: string;
@@ -20,6 +20,10 @@ const SignUp = () => {
   const [isLoading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+
+  if (authContext.isLoggedIn) {
+    return <Navigate to="/home" replace />;
+  }
 
   const onSubmit: SubmitHandler<Inputs> = async data => {
     setLoading(true);
