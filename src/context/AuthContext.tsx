@@ -16,6 +16,7 @@ type AuthContextType = {
   }) => Promise<boolean>;
   usersName: string;
   setUsersName: (name: string) => void;
+  logout: () => void;
 };
 
 export const AuthContext = createContext({} as AuthContextType);
@@ -47,9 +48,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     return response.data.status;
   };
 
+  const logout = () => {
+    setLoggedIn(false);
+    setUsersName("");
+  };
+
   return (
     <AuthContext.Provider
-      value={{ isLoggedIn, setLoggedIn, register, usersName, setUsersName }}
+      value={{
+        isLoggedIn,
+        setLoggedIn,
+        register,
+        usersName,
+        setUsersName,
+        logout,
+      }}
     >
       {children}
     </AuthContext.Provider>
