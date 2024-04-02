@@ -39,13 +39,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     email: string;
     password: string;
   }): Promise<boolean> => {
-    const response = await api.post<{ status: boolean; user_id: string }>("", {
-      name,
-      email,
-      password,
-    });
+    try {
+      const response = await api.post<{ status: boolean; user_id: string }>(
+        "",
+        {
+          name,
+          email,
+          password,
+        }
+      );
 
-    return response.data.status;
+      return response.data.status;
+    } catch (error) {
+      return false;
+    }
   };
 
   const logout = () => {
