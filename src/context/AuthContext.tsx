@@ -1,5 +1,6 @@
-import { createContext, useState } from "react";
+import { createContext } from "react";
 import api from "../api";
+import usePersistState from "./hooks/usePersistState";
 
 type AuthContextType = {
   isLoggedIn: boolean;
@@ -22,8 +23,11 @@ export const AuthContext = createContext({} as AuthContextType);
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [isLoggedIn, setLoggedIn] = useState(false);
-  const [usersName, setUsersName] = useState("");
+  const [isLoggedIn, setLoggedIn] = usePersistState<boolean>(
+    "isLoggedIn",
+    false
+  );
+  const [usersName, setUsersName] = usePersistState<string>("usersName", "");
 
   const register = async ({
     name,

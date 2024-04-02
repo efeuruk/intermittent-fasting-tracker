@@ -32,7 +32,7 @@ const FastingList: React.FC<FastingListProps> = ({
         <S.FastingListContainer>
           {fastingList.map(fasting => (
             <FastingListItem
-              key={fasting.date.toISOString()}
+              key={new Date(fasting.date).toISOString()}
               fasting={fasting}
             />
           ))}

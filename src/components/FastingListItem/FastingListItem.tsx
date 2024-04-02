@@ -22,7 +22,7 @@ const FastingListItem: React.FC<FastingListItemProps> = ({ fasting }) => {
           <S.Hour component={"h5"}>
             {getHoursAndMinutesFromSeconds(durationInHours)}
           </S.Hour>
-          <S.Date label={getTimeAgo(date)} />
+          <S.Date label={getTimeAgo(new Date(date))} />
         </S.Title>
         <S.StartAndEndTime>{`${startTime} - ${calculateEndTimeFromDurationAndStartTime(
           startTime,

@@ -1,6 +1,7 @@
-import React, { createContext, useState } from "react";
+import React, { createContext } from "react";
 import { getHoursFromSeconds } from "../utils";
 import { FastingItem } from "../types";
+import usePersistentStateArray from "./hooks/usePerisistStateArray";
 
 type FastingContextType = {
   // state
@@ -30,7 +31,10 @@ export const FastingContext = createContext<FastingContextType>(
 export const FastingProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [fastingList, setFastingList] = useState<FastingItem[]>([]);
+  const [fastingList, setFastingList] = usePersistentStateArray<FastingItem>(
+    "fastingList",
+    []
+  );
 
   const sortFastingListByDate = () => {
     fastingList.sort(
@@ -50,14 +54,14 @@ export const FastingProvider: React.FC<{ children: React.ReactNode }> = ({
     const date = new Date();
     const durationInHours = getHoursFromSeconds(duration);
     setFastingList(prev => [
-      ...prev,
       { durationInHours, duration, date, startTime, endTime },
+      ...prev,
     ]);
-    sortFastingListByDate();
   };
 
   const removeFromFastingList = (date: Date) => {
     setFastingList(prev => prev.filter(fasting => fasting.date !== date));
+    sortFastingListByDate();
   };
 
   const getTotalFastingHours = () => {
