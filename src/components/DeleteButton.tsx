@@ -47,7 +47,7 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ fasting }) => {
       </IconButton>
       <Popper id={id} open={open} anchorEl={anchorEl} placement="bottom-end">
         <DeleteCard variant="outlined" onClick={handleRemoval}>
-          <IconButton>
+          <IconButton sx={{ padding: 0, marginRight: "6px" }}>
             <TrashBinIcon />
           </IconButton>
           <Typography sx={{ fontSize: "15px" }}>

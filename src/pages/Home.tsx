@@ -1,5 +1,5 @@
 import FastingCard from "../components/FastingCard/FastingCard";
-import FastingList from "../components/FastingList";
+import FastingList from "../components/FastingList/FastingList";
 import TotalCards from "../components/TotalCards";
 import { useAuthContext } from "../context/hooks/useAuthContext";
 import { Typography } from "@mui/material";
@@ -13,7 +13,7 @@ const Home = () => {
       </Typography>
       <FastingCard />
       <TotalCards />
-      <FastingList />
+      <FastingList title="My Latest Fastings" />
     </>
   );
 };

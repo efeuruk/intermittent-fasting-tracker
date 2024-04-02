@@ -1,13 +1,12 @@
 import Header from "./components/Header";
 import { StyledEngineProvider } from "@mui/material";
-import { Route, Routes } from "react-router";
+import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import { AuthProvider } from "./context/AuthContext";
-import React from "react";
 import { FastingProvider } from "./context/FastingContext";
-
-const SignUp = React.lazy(() => import("./pages/SignUp/SignUp"));
-const Home = React.lazy(() => import("./pages/Home"));
+import SignUp from "./pages/SignUp/SignUp";
+import Home from "./pages/Home";
+import ViewAll from "./pages/ViewAll";
 
 function App() {
   return (
@@ -19,6 +18,7 @@ function App() {
             <Routes>
               <Route path="/register" element={<SignUp />} />
               <Route path="/home" element={<Home />} />
+              <Route path="/view-all" element={<ViewAll />} />
             </Routes>
           </Layout>
         </FastingProvider>
