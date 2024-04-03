@@ -1,12 +1,20 @@
 import { Card, Typography } from "@mui/material";
 import styled from "styled-components";
+import { mediaQueries } from "../../constants";
 
 export const StyledCard = styled(Card)`
   position: relative;
-  padding: 72px 92px 3px 92px;
+  display: flex;
+  justify-content: center;
+
+  padding: 72px 24px 3px 24px;
   margin-top: 36px;
   border-radius: 16px;
   border-color: transparent;
+
+  ${mediaQueries.sm} {
+    padding: 72px 92px 3px 92px;
+  }
 `;
 
 export const FastingCardTitle = styled(Typography)`

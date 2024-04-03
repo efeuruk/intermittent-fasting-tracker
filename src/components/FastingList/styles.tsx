@@ -8,6 +8,8 @@ import {
 
 export const Container = styled.div`
   margin-top: 40px;
+  max-height: 400px;
+  overflow-y: auto;
 `;
 
 export const TitleContainer = styled.div`

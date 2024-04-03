@@ -39,7 +39,7 @@ const SignUp = () => {
   };
 
   return (
-    <S.SignUpContainer>
+    <div>
       <S.StyledCard variant="outlined">
         <CardContent sx={{ padding: 0 }}>
           <S.CardTitle component={"h3"}>Create New Profile</S.CardTitle>
@@ -96,7 +96,7 @@ const SignUp = () => {
           </S.InputsForm>
         </CardContent>
       </S.StyledCard>
-    </S.SignUpContainer>
+    </div>
   );
 };
 

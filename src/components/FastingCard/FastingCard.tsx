@@ -91,7 +91,7 @@ const FastingCard = () => {
               left: 0,
             }}
           >
-            <Lottie options={lottieOptions} />
+            <Lottie options={lottieOptions} isClickToPauseDisabled />
           </div>
         )}
         <S.FastingCardTitle>

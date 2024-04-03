@@ -17,7 +17,6 @@ const TotalCards = () => {
         icon={"⌛️"}
         number={getTotalFastingHours()}
         title={"Total Hours"}
-        style={{ marginRight: "30px" }}
       />
       <TotalCard
         icon={"🎉"}

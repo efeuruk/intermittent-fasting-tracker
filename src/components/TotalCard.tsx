@@ -1,11 +1,23 @@
 import { Card, styled, Typography } from "@mui/material";
 import React from "react";
+import { mediaQueries } from "../constants";
 
 const StyledCard = styled(Card)`
-  padding: 24px 20px 31px 20px;
+  padding: 24px 15px 31px 15px;
   flex: 1;
   border-radius: 16px;
   border-color: transparent;
+
+  ${mediaQueries.sm} {
+    padding: 24px 30px 31px 30px;
+  }
+
+  &:first-child {
+    margin-right: 10px;
+    ${mediaQueries.sm} {
+      margin-right: 30px;
+    }
+  }
 `;
 
 const Icon = styled(Typography)`

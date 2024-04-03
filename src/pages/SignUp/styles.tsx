@@ -6,26 +6,29 @@ import {
   Typography,
   TypographyProps,
 } from "@mui/material";
-
-export const SignUpContainer = styled.div``;
+import { mediaQueries } from "../../constants";
 
 export const StyledCard = styled(Card)`
-  padding: 50px 92px 38px 92px;
+  padding: 50px 24px 38px 24px;
   border-radius: 16px;
   border-color: transparent;
+
+  ${mediaQueries.sm} {
+    padding: 50px 92px 38px 92px;
+  }
 `;
 
 export const CardTitle = styled((props: TypographyProps) => (
   <Typography {...props} />
 ))`
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
 `;
 
 export const CardSubTitle = styled((props: TypographyProps) => (
   <Typography {...props} />
 ))`
-  font-size: 17px;
+  font-size: 14px;
   font-weight: 400;
 `;
 
