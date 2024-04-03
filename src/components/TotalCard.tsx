@@ -12,7 +12,7 @@ const StyledCard = styled(Card)`
     padding: 24px 30px 31px 30px;
   }
 
-  &:first-child {
+  &:first-of-type {
     margin-right: 10px;
     ${mediaQueries.sm} {
       margin-right: 30px;
